@@ -20,7 +20,7 @@ import SwiperNavButton from "../SwiperNavButton";
 
 const Banner = () => {
   return (
-    <div className="mb-20">
+    <div className="mb-28">
       <div className="relative rounded-xl w-full max-h-[37.5rem]  mx-auto ">
         <div className="rounded-xl">
           <Swiper
