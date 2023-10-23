@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <footer className="footer p-10 text-white">
           <aside className="space-y-5">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center  ">
               <img className="" src={footerLogo} alt="" />
               <h3 className="font-bold text-xl">Car Doctor</h3>
             </div>

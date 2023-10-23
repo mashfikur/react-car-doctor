@@ -1,7 +1,7 @@
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { BiSearch } from "react-icons/bi";
 import navLogo from "../assets/logo.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const navLink = (
@@ -43,7 +43,9 @@ const Navbar = () => {
             </ul>
           </div>
           <div>
-            <img src={navLogo} alt="" />
+            <Link to={"/"}>
+              <img src={navLogo} alt="" />
+            </Link>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">

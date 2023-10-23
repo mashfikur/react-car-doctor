@@ -1,11 +1,13 @@
-
+import Banner from "../components/Home/Banner";
 
 const Home = () => {
-    return (
-        <div>
-           <h1 className="text-center font-semibold text-3xl">Car Doctor</h1> 
-        </div>
-    );
+  return (
+    <div>
+      <div>
+        <Banner></Banner>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
