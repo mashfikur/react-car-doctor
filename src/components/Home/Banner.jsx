@@ -21,9 +21,10 @@ import SwiperNavButton from "../SwiperNavButton";
 const Banner = () => {
   return (
     <div className="mb-20">
-      <div className="relative rounded-xl w-full h-[37.5rem]  mx-auto ">
+      <div className="relative rounded-xl w-full max-h-[37.5rem]  mx-auto ">
         <div className="rounded-xl">
           <Swiper
+            slidesPerView={1}
             spaceBetween={30}
             centeredSlides={true}
             // autoplay={{
@@ -31,13 +32,14 @@ const Banner = () => {
             //   disableOnInteraction: false,
             // }}
             navigation={false}
+            loop={true}
             modules={[Navigation, Autoplay, A11y]}
             className="mySwiper"
           >
             <SwiperSlide>
               <img
                 className="w-[100%] rounded-xl object-cover max-h-[37.5rem] mx-auto"
-                src={slide1}
+                src={slide5}
                 alt=""
               />
             </SwiperSlide>
@@ -65,7 +67,7 @@ const Banner = () => {
             <SwiperSlide>
               <img
                 className="w-[100%] rounded-xl object-cover max-h-[37.5rem] mx-auto"
-                src={slide5}
+                src={slide1}
                 alt=""
               />
             </SwiperSlide>
@@ -88,11 +90,11 @@ const Banner = () => {
                 the majority have suffered alteration in some form
               </p>
               <div className="flex gap-4">
-                <button className="btn bg-[#FF3811] border-none hover:bg-[#FF3811] text-white">
+                <button className="btn bg-main border-none hover:bg-main text-white capitalize">
                   Discover More
                 </button>
-                <button className="btn btn-outline text-white ">
-                  Discover More
+                <button className="btn btn-outline text-white  capitalize hover:bg-white hover:text-black">
+                  Latest project
                 </button>
               </div>
             </div>

@@ -15,7 +15,7 @@ const SwiperNavButton = () => {
       </button>
       <button
         onClick={() => swiper.slideNext()}
-        className="btn rounded-full bg-[#FF3811] hover:bg-[#FF3811] border-none text-white"
+        className="btn rounded-full bg-main hover:bg-main border-none text-white"
       >
         <BsArrowRight className=""></BsArrowRight>
       </button>

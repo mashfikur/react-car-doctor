@@ -59,7 +59,7 @@ const Navbar = () => {
               <HiOutlineShoppingBag></HiOutlineShoppingBag>
               <BiSearch></BiSearch>
               <div>
-                <button className="btn btn-outline text-[#FF3811] hover:bg-[#FF3811] hover:text-white  hover:border-[#FF3811] border-[#FF3811] ">
+                <button className="btn btn-outline text-main hover:bg-main hover:text-white hover:border-main ">
                   Appointment
                 </button>
               </div>
