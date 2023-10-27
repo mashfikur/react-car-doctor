@@ -6,7 +6,9 @@ const Services = () => {
   const [allServices, setAllServices] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/services").then((data) => setAllServices(data.data));
+    axios
+      .get("http://localhost:5000/services")
+      .then((data) => setAllServices(data.data));
   }, []);
 
   return (
@@ -27,7 +29,9 @@ const Services = () => {
             ></ServiceCard>
           ))}
         </div>
-        <button className="btn hover:border-none btn-outline text-main border-main  hover:bg-main">More Services</button>
+        <button className="btn hover:border-none btn-outline text-main border-main  hover:bg-main">
+          More Services
+        </button>
       </div>
     </div>
   );
