@@ -71,28 +71,41 @@ const Navbar = () => {
         <div className="navbar-end">
           <div>
             <div className="text-xl flex items-center gap-5">
-              <HiOutlineShoppingBag></HiOutlineShoppingBag>
-              <BiSearch></BiSearch>
+              {user && (
+                <>
+                  <Link to="/bookings" ><HiOutlineShoppingBag></HiOutlineShoppingBag></Link>
+                  <BiSearch></BiSearch>
+                </>
+              )}
               <div className="flex gap-4">
-                <button className="btn btn-outline text-main hover:bg-main hover:text-white hover:border-main ">
-                  Appointment
-                </button>
-
                 {loading ? (
                   <span className="loading loading-spinner loading-lg"></span>
                 ) : user ? (
-                  <button
-                    onClick={handleLogOut}
-                    className="btn  bg-main text-white  hover:bg-main  hover:border-main "
-                  >
-                    Log Out
-                  </button>
-                ) : (
-                  <Link to="/login">
-                    <button className="btn  bg-main text-white  hover:bg-main  hover:border-main ">
-                      Login
+                  <div className="flex gap-4">
+                    <button className="btn btn-outline text-main hover:bg-main hover:text-white hover:border-main ">
+                      Appointment
                     </button>
-                  </Link>
+
+                    <button
+                      onClick={handleLogOut}
+                      className="btn  bg-main text-white  hover:bg-main  hover:border-main "
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-4">
+                    <Link to="/sign-up">
+                      <button className="btn  bg-main text-white  hover:bg-main  hover:border-main ">
+                        Sign up
+                      </button>
+                    </Link>
+                    <Link to="/login">
+                      <button className="btn  bg-main text-white  hover:bg-main  hover:border-main ">
+                        Login
+                      </button>
+                    </Link>
+                  </div>
                 )}
               </div>
             </div>
