@@ -1,7 +1,22 @@
-import { Link, useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 
 const CheckOut = () => {
   const { id } = useParams();
+  const serviceData = useLoaderData();
+  const { _id, title, img, price } = serviceData;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const date = form.date.value;
+    const phone = form.phone.value;
+    const email = form.email.value;
+    const message = form.message.value;
+
+    console.log(name, date, phone, email, message);
+  };
 
   return (
     <div>
@@ -18,14 +33,14 @@ const CheckOut = () => {
       {/* checkout form */}
 
       <div className="p-24 bg-[#F3F3F3] rounded-lg mb-32">
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex items-center gap-5">
             <div className="flex-1">
               <input
                 className="w-full rounded-md py-4 px-6"
                 placeholder="First Name"
                 type="text"
-                name="firstName"
+                name="name"
                 required
               />
             </div>
@@ -70,11 +85,9 @@ const CheckOut = () => {
             ></textarea>
           </div>
           <div>
-            <Link to={`${id}`}>
-              <button className="btn capitalize bg-main text-white font-semibold hover:bg-main w-full">
-                Order Confirm
-              </button>
-            </Link>
+            <button className="btn capitalize bg-main text-white font-semibold hover:bg-main w-full">
+              Order Confirm
+            </button>
           </div>
         </form>
       </div>
