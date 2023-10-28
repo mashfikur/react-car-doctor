@@ -1,9 +1,19 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Authentication/AuthProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const CheckOut = () => {
-  const { id } = useParams();
   const serviceData = useLoaderData();
-  const { _id, title, img, price } = serviceData;
+  const { title, img, price } = serviceData;
+
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +25,25 @@ const CheckOut = () => {
     const email = form.email.value;
     const message = form.message.value;
 
-    console.log(name, date, phone, email, message);
+    const bookingInfo = {
+      userId: user.uid,
+      title,
+      img,
+      price,
+      userName: name,
+      date,
+      phone,
+      email,
+      message,
+    };
+
+    // storing info in database
+    axios.post("http://localhost:5000/bookings", bookingInfo).then((data) => {
+      if (data?.data?.insertedId) {
+        toast.success("Order Confirmed , Thank You ! ");
+        navigate(-1);
+      }
+    });
   };
 
   return (
@@ -42,12 +70,13 @@ const CheckOut = () => {
                 type="text"
                 name="name"
                 required
+                defaultValue={user && user?.displayName}
               />
             </div>
             <div className="flex-1">
               <input
                 className="w-full rounded-md py-4 px-6"
-                placeholder="Last Name"
+                placeholder="servicing date"
                 type="date"
                 name="date"
                 required
@@ -71,6 +100,7 @@ const CheckOut = () => {
                 type="email"
                 name="email"
                 required
+                defaultValue={user && user?.email}
               />
             </div>
           </div>

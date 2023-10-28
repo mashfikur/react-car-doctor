@@ -8,7 +8,7 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { userSignIn } = useContext(AuthContext);
+  const { userSignIn, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -28,6 +28,7 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(error.code);
+        setLoading(false);
       });
   };
 

@@ -7,7 +7,7 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, userSignOut } = useContext(AuthContext);
+  const { user, userSignOut, loading } = useContext(AuthContext);
 
   const navLink = (
     <>
@@ -16,14 +16,6 @@ const Navbar = () => {
       <NavLink to="/demo">Services</NavLink>
       <NavLink to="/demo">Blog</NavLink>
       <NavLink to="/demo">Contact</NavLink>
-      {user ? (
-        <NavLink to="/login">Log Out</NavLink>
-      ) : (
-        <>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/sign-up">Sign Up</NavLink>
-        </>
-      )}
     </>
   );
 
@@ -86,13 +78,21 @@ const Navbar = () => {
                   Appointment
                 </button>
 
-                {user && (
+                {loading ? (
+                  <span className="loading loading-spinner loading-lg"></span>
+                ) : user ? (
                   <button
                     onClick={handleLogOut}
                     className="btn  bg-main text-white  hover:bg-main  hover:border-main "
                   >
                     Log Out
                   </button>
+                ) : (
+                  <Link to="/login">
+                    <button className="btn  bg-main text-white  hover:bg-main  hover:border-main ">
+                      Login
+                    </button>
+                  </Link>
                 )}
               </div>
             </div>
