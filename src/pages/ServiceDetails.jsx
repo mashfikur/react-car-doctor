@@ -132,7 +132,7 @@ const ServiceDetails = () => {
           <div>
             <h3 className="font-bold text-4xl mb-7">Price ${price} </h3>
 
-            <Link>
+            <Link to={`/checkout/${_id}`}>
               <button className="btn w-full capitalize bg-main font-semibold hover:bg-main text-white">
                 Proceed Checkout
               </button>

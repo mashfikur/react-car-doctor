@@ -13,6 +13,8 @@ body {
 
 .service-banner {
   background: url("../src/assets/images/banner/4.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .service-active {
