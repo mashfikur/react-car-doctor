@@ -10,3 +10,7 @@
 body {
   font-family: "Inter", sans-serif;
 }
+
+.service-banner{
+  background: url("../src/assets/images/banner/4.jpg");
+}
