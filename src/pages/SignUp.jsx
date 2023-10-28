@@ -4,14 +4,15 @@ import icon1 from "../assets/icons/auth-icon-1.png";
 import icon2 from "../assets/icons/auth-icon-2.png";
 import icon3 from "../assets/icons/auth-icon-3.png";
 
-const Login = () => {
-  const handleLogin = (e) => {
+const SignUp = () => {
+  const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    console.log(email, password, name);
   };
 
   return (
@@ -24,10 +25,23 @@ const Login = () => {
             </div>
             <div className="lg:col-span-3 border rounded-xl shadow-lg py-10 lg:px-60 ">
               <div>
-                <h3 className="text-center font-semibold text-4xl">Login</h3>
+                <h3 className="text-center font-semibold text-4xl">Sign Up</h3>
               </div>
               <div className=" w-full  bg-base-100">
-                <form onSubmit={handleLogin} className="card-body">
+                <form onSubmit={handleSignUp} className="card-body">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text">Name</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="name"
+                      className="input input-bordered focus:outline-none"
+                      required
+                      name="name"
+                      autoComplete="true"
+                    />
+                  </div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text">Email</span>
@@ -53,15 +67,10 @@ const Login = () => {
                       name="password"
                       autoComplete="true"
                     />
-                    <label className="label">
-                      <Link className="label-text-alt link link-hover">
-                        Forgot password?
-                      </Link>
-                    </label>
                   </div>
                   <div className="form-control mt-6">
                     <button className="btn capitalize font-normal bg-main hover:bg-main text-white">
-                      Sign In
+                      Sign Up
                     </button>
                   </div>
                 </form>
@@ -88,9 +97,9 @@ const Login = () => {
                     />
                   </div>
                   <h3 className="font-medium mt-10 text-[#737373] text-center text-[1.12rem]">
-                    New on this website?{" "}
-                    <Link to="/sign-up" className="text-main font-semibold">
-                      Sign Up
+                    Already Have an account?{" "}
+                    <Link to="/login" className="text-main font-semibold">
+                      Sign In
                     </Link>
                   </h3>
                 </div>
@@ -103,4 +112,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
