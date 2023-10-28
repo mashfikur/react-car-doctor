@@ -2,8 +2,13 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { BiSearch } from "react-icons/bi";
 import navLogo from "../assets/logo.svg";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../Authentication/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+
   const navLink = (
     <>
       <NavLink to="/">Home</NavLink>
@@ -11,9 +16,26 @@ const Navbar = () => {
       <NavLink to="/demo">Services</NavLink>
       <NavLink to="/demo">Blog</NavLink>
       <NavLink to="/demo">Contact</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      {user ? (
+        <NavLink to="/login">Log Out</NavLink>
+      ) : (
+        <>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/sign-up">Sign Up</NavLink>
+        </>
+      )}
     </>
   );
+
+  const handleLogOut = () => {
+    userSignOut()
+      .then(() => {
+        toast.success("Logged Out successfully");
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
+  };
 
   return (
     <div className="container mx-auto">
@@ -59,10 +81,19 @@ const Navbar = () => {
             <div className="text-xl flex items-center gap-5">
               <HiOutlineShoppingBag></HiOutlineShoppingBag>
               <BiSearch></BiSearch>
-              <div>
+              <div className="flex gap-4">
                 <button className="btn btn-outline text-main hover:bg-main hover:text-white hover:border-main ">
                   Appointment
                 </button>
+
+                {user && (
+                  <button
+                    onClick={handleLogOut}
+                    className="btn  bg-main text-white  hover:bg-main  hover:border-main "
+                  >
+                    Log Out
+                  </button>
+                )}
               </div>
             </div>
           </div>

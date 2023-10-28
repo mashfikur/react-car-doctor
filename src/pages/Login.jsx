@@ -1,17 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginBanner from "../assets/images/login/login.svg";
 import icon1 from "../assets/icons/auth-icon-1.png";
 import icon2 from "../assets/icons/auth-icon-2.png";
 import icon3 from "../assets/icons/auth-icon-3.png";
+import { useContext } from "react";
+import { AuthContext } from "../Authentication/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { userSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    // console.log(email, password);
+
+    // signing in user
+    userSignIn(email, password)
+      .then(() => {
+        toast.success("Logged In Successfully");
+        form.reset();
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
   };
 
   return (

@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginBanner from "../assets/images/login/login.svg";
 import icon1 from "../assets/icons/auth-icon-1.png";
 import icon2 from "../assets/icons/auth-icon-2.png";
 import icon3 from "../assets/icons/auth-icon-3.png";
+import { useContext } from "react";
+import { AuthContext } from "../Authentication/AuthProvider";
+import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,7 +19,29 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password, name);
+    // console.log(email, password, name);
+
+    // creating user
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+
+        // updating user
+        updateProfile(user, {
+          displayName: name,
+        })
+          .then(() => {
+            toast.success("Account Created Successfully");
+            form.reset();
+            navigate("/");
+          })
+          .catch((error) => {
+            toast.error(error.code);
+          });
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
   };
 
   return (
