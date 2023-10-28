@@ -1,18 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { BsArrowRight } from "react-icons/bs";
+import { Link, NavLink, useLoaderData } from "react-router-dom";
 
 const ServiceDetails = () => {
   const serviceData = useLoaderData();
-  const [services,setServices]=useState([])
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/services").then(data=>setServices(data.data))
-  },[])
+    axios
+      .get("http://localhost:5000/services")
+      .then((data) => setServices(data.data));
+  }, []);
 
   const { title, _id, img, facility, description, price } = serviceData;
 
@@ -58,8 +61,31 @@ const ServiceDetails = () => {
           </div>
         </div>
         <div className="col-span-1">
-          <div>
-            <h3>Services : {services.length} </h3>
+          <div className="bg-[#F3F3F3] p-10 rounded-lg">
+            <h3 className="font-bold text-xl mb-5">Services</h3>
+
+            <div>
+              {services && (
+                <div className="space-y-5">
+                  {services.map((single) => (
+                    <div key={single._id}>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive ? "service-active " : ""
+                        }
+                        to={`/service-details/${single._id}`}
+                      >
+                        <div className="hover:bg-main bg-white hover:text-white p-5  rounded-lg">
+                          <p className="flex  items-center justify-between">
+                            {single.title} <BsArrowRight></BsArrowRight>{" "}
+                          </p>
+                        </div>
+                      </NavLink>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

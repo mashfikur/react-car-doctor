@@ -11,6 +11,15 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.service-banner{
+.service-banner {
   background: url("../src/assets/images/banner/4.jpg");
+}
+
+.service-active {
+  color: #ff3811;
+}
+
+.service-active > div {
+  background-color: #ff3811;
+  color: white;
 }
