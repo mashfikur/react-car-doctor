@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
+import { AiTwotoneFile } from "react-icons/ai";
 import { Link, NavLink, useLoaderData } from "react-router-dom";
 
 const ServiceDetails = () => {
@@ -60,7 +61,10 @@ const ServiceDetails = () => {
             ))}
           </div>
         </div>
+
+        {/* sidebar */}
         <div className="col-span-1">
+          {/* dynamic services */}
           <div className="bg-[#F3F3F3] p-10 rounded-lg">
             <h3 className="font-bold text-xl mb-5">Services</h3>
 
@@ -86,6 +90,53 @@ const ServiceDetails = () => {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* download section */}
+          <div className="my-7 p-10 rounded-lg ] bg-[#151515] text-white ">
+            <h3 className="font-bold text-xl mb-5">Download</h3>
+            <div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div>
+                    <AiTwotoneFile className="text-xl"></AiTwotoneFile>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Our Brochure</h3>
+                    <p className="text-[#A2A2A2]">Download</p>
+                  </div>
+                </div>
+                <div className="p-4 bg-main rounded-md cursor-pointer">
+                  <BsArrowRight></BsArrowRight>
+                </div>
+              </div>
+            </div>
+            <div className="mt-7">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div>
+                    <AiTwotoneFile className="text-xl"></AiTwotoneFile>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Company Details</h3>
+                    <p className="text-[#A2A2A2]">Download</p>
+                  </div>
+                </div>
+                <div className="p-4 bg-main rounded-md cursor-pointer">
+                  <BsArrowRight></BsArrowRight>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-bold text-4xl mb-7">Price ${price} </h3>
+
+            <Link>
+              <button className="btn w-full capitalize bg-main font-semibold hover:bg-main text-white">
+                Proceed Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
