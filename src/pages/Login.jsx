@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginBanner from "../assets/images/login/login.svg";
 import icon1 from "../assets/icons/auth-icon-1.png";
 import icon2 from "../assets/icons/auth-icon-2.png";
@@ -6,10 +6,13 @@ import icon3 from "../assets/icons/auth-icon-3.png";
 import { useContext } from "react";
 import { AuthContext } from "../Authentication/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Login = () => {
   const { userSignIn, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -21,10 +24,19 @@ const Login = () => {
 
     // signing in user
     userSignIn(email, password)
-      .then(() => {
+      .then((result) => {
         toast.success("Logged In Successfully");
         form.reset();
-        navigate("/");
+        navigate(from, { replace: true });
+
+        // get token from server
+        const user = { uid: result?.user?.uid };
+
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+          });
       })
       .catch((error) => {
         toast.error(error.code);

@@ -73,7 +73,9 @@ const Navbar = () => {
             <div className="text-xl flex items-center gap-5">
               {user && (
                 <>
-                  <Link to="/bookings" ><HiOutlineShoppingBag></HiOutlineShoppingBag></Link>
+                  <Link to="/bookings">
+                    <HiOutlineShoppingBag></HiOutlineShoppingBag>
+                  </Link>
                   <BiSearch></BiSearch>
                 </>
               )}

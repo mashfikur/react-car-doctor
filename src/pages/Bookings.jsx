@@ -8,15 +8,23 @@ import { Link } from "react-router-dom";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [bookingLoading, setBookingLoading] = useState(true);
 
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const userId = user?.uid;
 
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/bookings/${userId}`).then((data) => {
-      setBookings(data.data);
-    });
+    setBookingLoading(true);
+    axios
+      .get(`http://localhost:5000/bookings/${userId}`, {
+        withCredentials: true,
+      })
+      .then((data) => {
+        setBookings(data.data);
+        setBookingLoading(false);
+      });
   }, [userId]);
 
   const handleDelete = (_id) => {
@@ -41,7 +49,7 @@ const Bookings = () => {
       </div>
 
       {/* table */}
-      {loading ? (
+      {bookingLoading ? (
         <div className="flex min-h-screen items-center justify-center flex-col">
           <span className="loading loading-spinner loading-lg"></span>
         </div>
