@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
 
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const userId = user?.uid;
 
@@ -40,31 +40,45 @@ const Bookings = () => {
         </div>
       </div>
 
-      <div className="mb-10">
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th className="text-base">Service</th>
-                <th className="text-base">Price</th>
-                <th className="text-base">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.map((data) => (
-                <BookingList
-                  key={data._id}
-                  booking={data}
-                  handleDelete={handleDelete}
-                ></BookingList>
-              ))}
-            </tbody>
-          </table>
+      {/* table */}
+      {loading ? (
+        <div className="flex min-h-screen items-center justify-center flex-col">
+          <span className="loading loading-spinner loading-lg"></span>
         </div>
-      </div>
+      ) : bookings.length ? (
+        <div className="mb-10">
+          <div className="overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th></th>
+                  <th className="text-base">Service</th>
+                  <th className="text-base">Price</th>
+                  <th className="text-base">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookings.map((data) => (
+                  <BookingList
+                    key={data._id}
+                    booking={data}
+                    handleDelete={handleDelete}
+                  ></BookingList>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="min-h-[50vh]">
+          <h3 className=" text-center capitalize text-5xl font-bold text-gray-400">
+            You {"haven't"} booked any services yet{" "}
+          </h3>
+        </div>
+      )}
 
+      {/* buttons */}
       <div className="flex items-center mb-32 text-[1.12rem] justify-between">
         <div>
           <Link to="/">
