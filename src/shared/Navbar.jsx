@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Authentication/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, userSignOut, loading } = useContext(AuthContext);
@@ -23,6 +24,11 @@ const Navbar = () => {
     userSignOut()
       .then(() => {
         toast.success("Logged Out successfully");
+
+        // clearing the cookie
+        axios.get("http://localhost:5000/remove-token", {
+          withCredentials: true,
+        });
       })
       .catch((error) => {
         toast.error(error.code);

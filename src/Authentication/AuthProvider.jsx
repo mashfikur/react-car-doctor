@@ -7,7 +7,6 @@ import {
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
-import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -44,14 +43,7 @@ const AuthProvider = ({ children }) => {
 
   // sing out user
   const userSignOut = () => {
-    axios
-      .get("http://localhost:5000/remove-token", { withCredentials: true })
-      .then((res) => {
-        if (res.data) {
-          console.log(res.data);
-          return signOut(auth);
-        }
-      });
+    return signOut(auth);
   };
 
   const userInfo = {
