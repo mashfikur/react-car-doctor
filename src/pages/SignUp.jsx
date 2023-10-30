@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Authentication/AuthProvider";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -25,6 +26,17 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+
+        // getting a token
+
+        const userInfo = { uid: result?.user?.uid };
+        axios
+          .post("http://localhost:5000/jwt", userInfo, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
 
         // updating user
         updateProfile(user, {

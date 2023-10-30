@@ -25,10 +25,6 @@ const Login = () => {
     // signing in user
     userSignIn(email, password)
       .then((result) => {
-        toast.success("Logged In Successfully");
-        form.reset();
-        navigate(from, { replace: true });
-
         // get token from server
         const user = { uid: result?.user?.uid };
 
@@ -36,6 +32,9 @@ const Login = () => {
           .post("http://localhost:5000/jwt", user, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
+            toast.success("Logged In Successfully");
+            form.reset();
+            navigate(from, { replace: true });
           });
       })
       .catch((error) => {
