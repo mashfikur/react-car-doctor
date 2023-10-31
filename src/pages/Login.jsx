@@ -29,7 +29,9 @@ const Login = () => {
         const user = { uid: result?.user?.uid };
 
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://car-doctor-server-sable-ten.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res.data);
             toast.success("Logged In Successfully");

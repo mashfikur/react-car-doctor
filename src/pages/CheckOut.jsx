@@ -38,12 +38,17 @@ const CheckOut = () => {
     };
 
     // storing info in database
-    axios.post("http://localhost:5000/bookings", bookingInfo).then((data) => {
-      if (data?.data?.insertedId) {
-        toast.success("Order Confirmed , Thank You ! ");
-        navigate(-1);
-      }
-    });
+    axios
+      .post(
+        "https://car-doctor-server-sable-ten.vercel.app/bookings",
+        bookingInfo
+      )
+      .then((data) => {
+        if (data?.data?.insertedId) {
+          toast.success("Order Confirmed , Thank You ! ");
+          navigate(-1);
+        }
+      });
   };
 
   return (

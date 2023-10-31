@@ -7,7 +7,7 @@ const Services = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/services")
+      .get("https://car-doctor-server-sable-ten.vercel.app/services")
       .then((data) => setAllServices(data.data));
   }, []);
 

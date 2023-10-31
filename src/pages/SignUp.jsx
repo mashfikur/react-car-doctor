@@ -10,7 +10,7 @@ import { updateProfile } from "firebase/auth";
 import axios from "axios";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignUp = (e) => {
@@ -31,9 +31,13 @@ const SignUp = () => {
 
         const userInfo = { uid: result?.user?.uid };
         axios
-          .post("http://localhost:5000/jwt", userInfo, {
-            withCredentials: true,
-          })
+          .post(
+            "https://car-doctor-server-sable-ten.vercel.app/jwt",
+            userInfo,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => {
             console.log(res.data);
           });
@@ -52,6 +56,7 @@ const SignUp = () => {
           });
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error.code);
       });
   };

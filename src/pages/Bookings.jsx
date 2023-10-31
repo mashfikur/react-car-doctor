@@ -14,13 +14,15 @@ const Bookings = () => {
 
   const userId = user?.uid;
 
-
   useEffect(() => {
     setBookingLoading(true);
     axios
-      .get(`http://localhost:5000/bookings/${userId}`, {
-        withCredentials: true,
-      })
+      .get(
+        `https://car-doctor-server-sable-ten.vercel.app/bookings/${userId}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((data) => {
         setBookings(data.data);
         setBookingLoading(false);
@@ -29,7 +31,9 @@ const Bookings = () => {
 
   const handleDelete = (_id) => {
     axios
-      .delete(`http://localhost:5000/bookings/${_id}/delete`)
+      .delete(
+        `https://car-doctor-server-sable-ten.vercel.app/bookings/${_id}/delete`
+      )
       .then((data) => {
         if (data?.data?.deletedCount) {
           const remaining = bookings.filter((data) => data._id !== _id);

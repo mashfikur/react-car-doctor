@@ -31,17 +31,29 @@ const router = createBrowserRouter([
         path: "/service-details/:id",
         element: <ServiceDetails></ServiceDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(
+            `https://car-doctor-server-sable-ten.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "/checkout/:id",
-        element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <CheckOut></CheckOut>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(
+            `https://car-doctor-server-sable-ten.vercel.app/services/${params.id}`
+          ),
       },
       {
         path: "/bookings",
-        element: <PrivateRoute><Bookings></Bookings></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <Bookings></Bookings>
+          </PrivateRoute>
+        ),
       },
     ],
   },

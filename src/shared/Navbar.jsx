@@ -26,9 +26,12 @@ const Navbar = () => {
         toast.success("Logged Out successfully");
 
         // clearing the cookie
-        axios.get("http://localhost:5000/remove-token", {
-          withCredentials: true,
-        });
+        axios.get(
+          "https://car-doctor-server-sable-ten.vercel.app/remove-token",
+          {
+            withCredentials: true,
+          }
+        )
       })
       .catch((error) => {
         toast.error(error.code);
